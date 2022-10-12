@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" 
     integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" 
@@ -13,11 +19,109 @@
     <title>Weather Dashboard</title>
 </head>
 <body>
-        <div class="container-fluid header d-flex justify-content-center">
-            <div class="row">
-                <h1>Weather Dashboard</h1>
+    <div class="container-fluid d-flex justify-content-center header">
+        <div class="row">
+            <h1>Weather Dashboard</h1>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-4 border-right">
+                <div class="container d-flex flex-column border-bottom" id="searchCity">
+                    <h2>Search for a City:</h2>
+                    <input type="city" class="form-control mb-0 mt-3" id="cityInput" placeholder="city name">
+                    <button type="button" class="btn my-3 searchBtn" id="mainSearch">Search</button>             
+                </div>
+                <div class="container d-flex flex-column" id="clickCity">
+                    <button type="button" class="btn my-2 cityButtons" id="Houston">Houston</button>
+                    <button type="button" class="btn my-2 cityButtons" id="Chicago">Chicago</button>
+                    <button type="button" class="btn my-2 cityButtons" id="Orlando">Orlando</button>
+                    <button type="button" class="btn my-2 cityButtons" id="Los Angeles">Los Angeles</button>
+                    <button type="button" class="btn my-2 cityButtons" id="Seattle">Seattle</button>
+                    <button type="button" class="btn my-2 cityButtons" id="New York">New York</button>
+                    <button type="button" class="btn my-2 cityButtons" id="Santa Fe">Santa Fe</button>
+                    <button type="button" class="btn my-2 cityButtons" id="Detroit">Detroit</button>             
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="row d-flex flex-column ml-3">
+                    <h3>Current Weather</h3>
+                    <div class="row d-flex dlex-column">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="row">
+                                    <h4 class="col-5 currentcityName">City Name</h4>
+                                    <p class="col-5 currentDate">Date</p>
+                                    <i class="col-2 fa-regular fa-sun"></i>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <p class="row" id="currentTemp">Temperature: </p>
+                                <p class="row" id="currentWind">Wind: </p>
+                                <p class="row" id="currentHumidity">Humidity: </p>
+                            </div> 
+                        </div>                        
+                    </div>                   
+                </div>
+                <div class="row mt-3 mr-3 d-flex flex-column">
+                    <h5>5 Day Forecast</h5>
+                    <div class="row">
+                        <div class="col-2">
+                            <div class="card" id="5dayCard">
+                                <div class="card-header" id="date1">Date 1</div>
+                                <div class="card-body">
+                                    <p class="row" id="day1Temp">Temperature: </p>
+                                    <p class="row" id="day1Wind">Wind: </p>
+                                    <p class="row" id="day1Humidity">Humidity: </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="card" id="5dayCard">
+                                <div class="card-header" id="date2">Date 2</div>
+                                <div class="card-body">
+                                    <p class="row" id="day1Temp">Temperature: </p>
+                                    <p class="row" id="day1Wind">Wind: </p>
+                                    <p class="row" id="day1Humidity">Humidity: </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="card" id="5dayCard">
+                                <div class="card-header" id="date3">Date 3</div>
+                                <div class="card-body">
+                                    <p class="row" id="day1Temp">Temperature: </p>
+                                    <p class="row" id="day1Wind">Wind: </p>
+                                    <p class="row" id="day1Humidity">Humidity: </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="card" id="5dayCard">
+                                <div class="card-header" id="date4">Date 4</div>
+                                <div class="card-body">
+                                    <p class="row" id="day1Temp">Temperature: </p>
+                                    <p class="row" id="day1Wind">Wind: </p>
+                                    <p class="row" id="day1Humidity">Humidity: </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="card" id="5dayCard">
+                                <div class="card-header" id="date5">Date 5</div>
+                                <div class="card-body">
+                                    <p class="row" id="day1Temp">Temperature: </p>
+                                    <p class="row" id="day1Wind">Wind: </p>
+                                    <p class="row" id="day1Humidity">Humidity: </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
+
 
     
 <script src="./assets/script.js"></script>     

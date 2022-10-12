@@ -1,5 +1,7 @@
 body {
     font-family: 'Poppins', sans-serif;
+    background: #f4f4ec;
+    
 }
 
 .header{
@@ -9,4 +11,21 @@ body {
 
 h1 {
 
+}
+
+.searchBtn {
+    background: #615dec;
+    color:white;
+}
+
+.cityButtons {
+    background:#301781;
+    color:white;
+}
+
+.border-bottom{
+    color: #301781; 
+}
+.second-color { 
+	background: #76e2f4; 
 }
