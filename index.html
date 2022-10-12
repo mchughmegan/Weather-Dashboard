@@ -22,25 +22,36 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-4 border-right">
-                <div class="container d-flex flex-column border-bottom" id="searchCity">
+                <div class="container d-flex flex-column border-bottom mt-1" id="searchCity">
                     <h2>Search for a City:</h2>
-                    <input type="city" class="form-control mb-0 mt-3" id="cityInput" placeholder="city name">
-                    <button type="button" class="btn my-3 searchBtn" id="mainSearch">Search</button>             
+                    <form id="search-form" class="form">
+                        <div class="form-inline form-group">
+                            <div class="input-group">
+                                <input type="city" class="form-control mb-0 mt-3" 
+                                id="cityInput" placeholder="city name">
+                            </div>
+                            <div class="input-group-append">
+                                <button type="button" class="btn my-3 searchBtn" 
+                                id="mainSearch">Search</button>
+                                <hr/>
+                            </div>
+                        </div>
+                    </form>           
                 </div>
                 <div class="container d-flex flex-column" id="clickCity">
-                    <button type="button" class="btn my-2 cityButtons" id="Houston">Houston</button>
+                    <!-- <button type="button" class="btn my-2 cityButtons" id="Houston">Houston</button>
                     <button type="button" class="btn my-2 cityButtons" id="Chicago">Chicago</button>
                     <button type="button" class="btn my-2 cityButtons" id="Orlando">Orlando</button>
                     <button type="button" class="btn my-2 cityButtons" id="Los Angeles">Los Angeles</button>
                     <button type="button" class="btn my-2 cityButtons" id="Seattle">Seattle</button>
                     <button type="button" class="btn my-2 cityButtons" id="New York">New York</button>
                     <button type="button" class="btn my-2 cityButtons" id="Santa Fe">Santa Fe</button>
-                    <button type="button" class="btn my-2 cityButtons" id="Detroit">Detroit</button>             
+                    <button type="button" class="btn my-2 cityButtons" id="Detroit">Detroit</button>              -->
                 </div>
             </div>
             <div class="col-8">
-                <div class="row d-flex flex-column ml-3 mt-3">
-                    <h3>Current Weather</h3>
+                <section class="row d-flex flex-column ml-3 mt-1" id="today">
+                    <!-- <h3>Current Weather</h3>
                     <div class="row d-flex dlex-column">
                         <div class="col-11">
                             <div class="card">
@@ -58,16 +69,16 @@
                                 </div> 
                             </div> 
                         </div>                       
-                    </div>                   
-                </div>
-                <div class="row d-flex flex-column ml-3 mt-1">
-                    <h5>5 Day Forecast</h5>
+                    </div>                    -->
+                </section>
+                <section class="row d-flex flex-column ml-3 mt-1" id="forecast">
+                    <!-- <h5>5 Day Forecast</h5>
                     <div class="row">
                         <div class="col-2">
                             <div class="card" id="fivedayCard">
                                 <div class="card-header" id="date1">Date 1</div>
                                 <div class="card-body">
-                                    <i class="col-2 fa-regular fa-sun id=day1Icon"></i>
+                                    <i class="fa-regular fa-sun id=day1Icon"></i>
                                     <p class="row" id="day1Temp">Temp: </p>
                                     <p class="row" id="day1Wind">Wind: </p>
                                     <p class="row" id="day1Humidity">Humidity: </p>
@@ -78,7 +89,7 @@
                             <div class="card" id="fivedayCard">
                                 <div class="card-header" id="date2">Date 2</div>
                                 <div class="card-body">
-                                    <i class="col-2 fa-regular fa-sun id=day2Icon"></i>
+                                    <i class="fa-regular fa-sun id=day2Icon"></i>
                                     <p class="row" id="day2Temp">Temp: </p>
                                     <p class="row" id="day2Wind">Wind: </p>
                                     <p class="row" id="day2Humidity">Humidity: </p>
@@ -89,7 +100,7 @@
                             <div class="card" id="fivedayCard">
                                 <div class="card-header" id="date3">Date 3</div>
                                 <div class="card-body">
-                                    <i class="col-2 fa-regular fa-sun id=day3Icon"></i>
+                                    <i class="fa-regular fa-sun id=day3Icon"></i>
                                     <p class="row" id="day3Temp">Temp: </p>
                                     <p class="row" id="day3Wind">Wind: </p>
                                     <p class="row" id="day3Humidity">Humidity: </p>
@@ -100,7 +111,7 @@
                             <div class="card" id="fivedayCard">
                                 <div class="card-header" id="date4">Date 4</div>
                                 <div class="card-body">
-                                    <i class="col-2 fa-regular fa-sun id=day4Icon"></i>
+                                    <i class="fa-regular fa-sun id=day4Icon"></i>
                                     <p class="row" id="day4Temp">Temp: </p>
                                     <p class="row" id="day4Wind">Wind: </p>
                                     <p class="row" id="day4Humidity">Humidity: </p>
@@ -111,21 +122,34 @@
                             <div class="card" id="fivedayCard">
                                 <div class="card-header" id="date5">Date 5</div>
                                 <div class="card-body">
-                                    <i class="col-2 fa-regular fa-sun id=day5Icon"></i>
+                                    <i class="fa-regular fa-sun id=day5Icon"></i>
                                     <p class="row" id="day5Temp">Temp: </p>
                                     <p class="row" id="day5Wind">Wind: </p>
                                     <p class="row" id="day5Humidity">Humidity: </p>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
+                        </div> -->
+                    <!-- </div> -->
+                </section>
             </div>
         </div>
     </div>
-
-
-    
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.4/dayjs.min.js"
+    integrity="sha512-0fcCRl828lBlrSCa8QJY51mtNqTcHxabaXVLPgw/jPA5Nutujh6CbTdDgRzl9aSPYW/uuE7c4SffFUQFBAy6lg=="
+    crossorigin="anonymous"
+></script>
+<script 
+    src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.4/plugin/utc.min.js" 
+    integrity="sha512-m00bfmYnAl3plEBlQfeQUhw/U2uvmw29V2+jxSWpAjankMWS+zAsjezbKWDEJNXqWq9o9qQZSOiA2RKDpa4D5w==" 
+    crossorigin="anonymous"
+></script>
+<script 
+    src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.4/plugin/timezone.min.js" 
+    integrity="sha512-pslqxxHAYPCxaSeFSmXXxDkLejD5dbFVC66aiVq0z4v7VTJBU+wqcG1OpNh4p3MjS2D6NCwz/H2QmSc7dXxryg==" 
+    crossorigin="anonymous"
+></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>   
 <script src="./assets/script.js"></script>     
 </body>
 </html>
