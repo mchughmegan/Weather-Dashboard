@@ -23,9 +23,17 @@ h1 {
     color:white;
 }
 
+#fivedayCard {
+   
+}
+
+.card-header {
+    background: #76e2f4; 
+}
+
 .border-bottom{
     color: #301781; 
 }
 .second-color { 
-	background: #76e2f4; 
+	
 }
