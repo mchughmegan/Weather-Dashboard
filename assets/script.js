@@ -28,7 +28,7 @@ dayjs.extend(window.dayjs_plugin_timezone);
         //set text content of the button to the name of the city
         //append the button to the search history container
         //most recently search cities at end of list
-function displaySearch() {
+function displayCities() {
     oldCities.innerHTML="";
     for (var i = searchHistory.length-1; i>=0; i--) {
         var btn = document.createElement("button");
@@ -54,7 +54,7 @@ function updateHistory(search) {
     }
     searchHistory.push(search);
     localStorage.setItem("city-history", JSON.stringify(searchHistory));
-    displaySearch();
+    displayCities();
 };
 
 //function to get our search history from local storage
@@ -68,7 +68,7 @@ function getHistory(){
     if (cityHistory) {
         searchHistory=JSON.parse(cityHistory);
     }
-    displaySearch();
+    displayCities();
 };
 
 //function to display the current weather from the api
@@ -122,7 +122,7 @@ function showCurrent(city,weather){
 function showOneForecast(forecast){
     //forecast.main.temp
     var date = dayjs().format("M/D/YYYY");
-    var temp = forecasat.main.temp;
+    var temp = forecast.main.temp;
     var wind = forecast.wind.speed;
     var humidity = forecast.main.humidity;
     var iconURL = `https://openweathermap.org/img/w/${weather.weather[0].icon}.png`;
@@ -172,14 +172,18 @@ function showFiveForecast(){
     //call the function that is the duplication of the five day forecast card
 
 function displayWeather() {
+    showFiveForecast();
+    showCurrent();
 
 };
 
 //api calls
 function callApi(searchInput) {
-    queryURL = queryURL + '/data/2.5/weather?q=' + searchInput + APIkey;
+    queryURL = queryURL + '/data/2.5/weather?q=' + searchInput + `&appid=`+ APIkey;
   
-    fetch(queryURL)
+    fetch(queryURL);
+    console.log("hello");
+    displayWeather;
     //   .then(function (response) {
     //     if (!response.ok) {
     //       throw response.json();
@@ -216,17 +220,20 @@ function callApi(searchInput) {
 function searchSubmit(event){
     event.PreventDefault();
     console.log("worked");
+    callApi;
 };
 
 //create a function that handles when somebody clicks on one of the previously searched cities
-function previousButton(){
+function previousButton(event){
+    event.PreventDefault();
+    console.log("forecast");
 
 };
 //call on the function that gets our search history from local storage 
 getHistory();
 
 //add event listeners to our search button
-searchButton.addEventListener('submit', searchSubmit);
+$(searchButton).on('click', searchSubmit);
 // searchButton.onclick(searchSubmit);
 //add event listener from when someone clicks on one of the previously searched cities
 oldCities.addEventListener('click', previousButton);
