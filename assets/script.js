@@ -1,5 +1,5 @@
 var APIkey = "05c258fa745fbc728c4ebf2eb6a9a431";
-var queryURL = "http://api.openweathermap.org";
+var queryURL = "https://api.openweathermap.org";
 var searchHistory = [];
 //create more variables that reference html elements
 //search form
@@ -8,7 +8,7 @@ var searchHistory = [];
 //forecast container
 //search history container
 var searchForm = document.querySelector("#search-form");
-var searchInput = document.querySelector("#city-input");
+var searchInput = document.querySelector("#cityInput");
 var currentWeather = document.querySelector("#today");
 var fiveDay = document.querySelector("#forecast");
 var oldCities = document.querySelector("#clickCity");
@@ -178,42 +178,13 @@ function displayWeather() {
 };
 
 //api calls
-function callApi(searchInput) {
+function coordApi(searchInput) {
     //get coordinates 
-    //http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}
-    // var getCoord = queryURL + searchInput 
+    // http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}
+    var getCoord = queryURL + '/geo/1.0/direct?q=' + searchInput + '&limit=3' + '&appid=' + APIkey;
+    fetch(getCoord);
+    console.log(getCoord);
     
-    // var callURL = queryURL + '/data/2.5/weather?q=' + searchInput + `&appid=` + APIkey;
-
-    // fetch(callURL);
-    // console.log("hello");
-    // displayWeather;
-    //   .then(function (response) {
-    //     if (!response.ok) {
-    //       throw response.json();
-    //     }
-
-    //     return response.json();
-    //   })
-    //   .then(function (locRes) {
-    //     // write query to page so user knows what they are viewing
-    //     resultTextEl.textContent = locRes.search.query;
-
-    //     console.log(locRes);
-
-    //     if (!locRes.results.length) {
-    //       console.log('No results found!');
-    //       resultContentEl.innerHTML = '<h3>No results found, search again!</h3>';
-    //     } else {
-    //       resultContentEl.textContent = '';
-    //       for (var i = 0; i < locRes.results.length; i++) {
-    //         printResults(locRes.results[i]);
-    //       }
-    //     }
-    //   })
-    //   .catch(function (error) {
-    //     console.error(error);
-    //   });
 }
 
 //function that fetches weather data from the 1. geo location endpoint and 
@@ -224,7 +195,7 @@ function callApi(searchInput) {
 function searchSubmit(event) {
     event.preventDefault();
     console.log(searchInput.value);
-    callApi;
+    coordApi(searchInput.value);
 };
 
 //create a function that handles when somebody clicks on one of the previously searched cities
