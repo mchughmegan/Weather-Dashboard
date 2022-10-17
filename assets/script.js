@@ -179,11 +179,15 @@ function displayWeather() {
 
 //api calls
 function callApi(searchInput) {
-    var callURL = queryURL + '/data/2.5/weather?q=' + searchInput + `&appid=` + APIkey;
+    //get coordinates 
+    //http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}
+    // var getCoord = queryURL + searchInput 
+    
+    // var callURL = queryURL + '/data/2.5/weather?q=' + searchInput + `&appid=` + APIkey;
 
-    fetch(callURL);
-    console.log("hello");
-    displayWeather;
+    // fetch(callURL);
+    // console.log("hello");
+    // displayWeather;
     //   .then(function (response) {
     //     if (!response.ok) {
     //       throw response.json();
@@ -219,7 +223,7 @@ function callApi(searchInput) {
 //create a function that handles the submission of our search form
 function searchSubmit(event) {
     event.preventDefault();
-    console.log("worked");
+    console.log(searchInput.value);
     callApi;
 };
 
