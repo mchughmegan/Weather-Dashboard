@@ -13,6 +13,8 @@ var currentWeather = document.querySelector("#today");
 var fiveDay = document.querySelector("#forecast");
 var oldCities = document.querySelector("#clickCity");
 var searchButton = document.querySelector("#mainSearch");
+var lat = " ";
+var long = " ";
 
 //add some plugins for day js
 //utc plugin and timezone plugin
@@ -182,9 +184,22 @@ function coordApi(searchInput) {
     //get coordinates 
     // http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}
     var getCoord = queryURL + '/geo/1.0/direct?q=' + searchInput + '&limit=3' + '&appid=' + APIkey;
-    fetch(getCoord);
-    console.log(getCoord);
-    
+    fetch(getCoord)
+    .then(function(response){
+        return response.json();
+    })
+    .then(function(data){
+        console.log(data);
+        lat = data[0].lat;
+        console.log(lat);
+        long = data[0].lon;
+        console.log(long);
+    })
+}
+
+function currentApi(){
+    //https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}
+    var getCurrent =  queryURL + 
 }
 
 //function that fetches weather data from the 1. geo location endpoint and 
