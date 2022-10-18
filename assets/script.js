@@ -176,6 +176,9 @@ function displayWeather() {
 };
 
 //api calls
+//function that fetches weather data from the 1. geo location endpoint and 
+//2. uses the onecall endpoint to retrieve the data to display the current and forecast weather
+//two functions
 function coordApi(searchInput) {
     //get coordinates 
     // http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}
@@ -214,22 +217,6 @@ function weatherApi() {
             displayWeather();
         })
 }
-
-// function forecastApi(){
-//     //https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
-//     var getForecast =  queryURL + '/data/2.5/forecast?' + 'lat=' + lat + '&lon=' + long + '&appid=' + APIkey;
-//     fetch(getForecast)
-//     .then(function(response){
-//         return response.json();
-//     })
-//     .then(function(data){
-//         console.log(data);
-//     })
-// }
-
-//function that fetches weather data from the 1. geo location endpoint and 
-//2. uses the onecall endpoint to retrieve the data to display the current and forecast weather
-//two functions
 
 //create a function that handles the submission of our search form
 function searchSubmit(event) {
