@@ -15,6 +15,7 @@ var oldCities = document.querySelector("#clickCity");
 var searchButton = document.querySelector("#mainSearch");
 var lat = " ";
 var long = " ";
+var cityHistory = " ";
 
 //add some plugins for day js
 //utc plugin and timezone plugin
@@ -39,6 +40,7 @@ function displayCities() {
         btn.classList.add("history-btn", "btn-history");
         btn.setAttribute("data-search", searchHistory[i]);
         btn.textContent = searchHistory[i];
+        btn.setAttribute("value", searchHistory[i]);
         oldCities.append(btn);
     }
 
@@ -50,11 +52,11 @@ function displayCities() {
 //then, set the item in local storage 
 //next, call on the function that displays the search history list
 
-function updateHistory(search) {
-    if (searchHistory.indexOf(search) !== -1) {
+function updateHistory(searchInput) {
+    if (searchHistory.indexOf(searchInput) !== -1) {
         return;
     }
-    searchHistory.push(search);
+    searchHistory.push(searchInput);
     localStorage.setItem("city-history", JSON.stringify(searchHistory));
     displayCities();
 };
@@ -194,12 +196,33 @@ function coordApi(searchInput) {
         console.log(lat);
         long = data[0].lon;
         console.log(long);
-    })
+        currentApi();
+        forecastApi();
+    }) 
 }
 
 function currentApi(){
     //https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}
-    var getCurrent =  queryURL + 
+    var getCurrent =  queryURL + '/data/2.5/weather?' + 'lat=' + lat + '&lon=' + long + '&appid=' + APIkey;
+    fetch(getCurrent)
+    .then(function(response){
+        return response.json();
+    })
+    .then(function(data){
+        console.log(data);
+    })
+}
+
+function forecastApi(){
+    //https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
+    var getForecast =  queryURL + '/data/2.5/forecast?' + 'lat=' + lat + '&lon=' + long + '&appid=' + APIkey;
+    fetch(getForecast)
+    .then(function(response){
+        return response.json();
+    })
+    .then(function(data){
+        console.log(data);
+    })
 }
 
 //function that fetches weather data from the 1. geo location endpoint and 
@@ -211,12 +234,17 @@ function searchSubmit(event) {
     event.preventDefault();
     console.log(searchInput.value);
     coordApi(searchInput.value);
+    updateHistory(searchInput.value);
 };
 
 //create a function that handles when somebody clicks on one of the previously searched cities
-function previousButton(event) {
+function previousClick(event) {
     event.preventDefault();
     console.log("forecast");
+    console.log(cityHistory.valueOf);
+    // let searchInput = searchHistory;
+    // console.log(searchInput.value);
+    // coordApi(searchInput.value);
 
 };
 //call on the function that gets our search history from local storage 
@@ -226,7 +254,7 @@ getHistory();
 $('#mainSearch').on('click', searchSubmit);
 // searchButton.onclick(searchSubmit);
 //add event listener from when someone clicks on one of the previously searched cities
-oldCities.addEventListener('click', previousButton);
+$('#clickCity').on('click', previousClick);
 
 
 
