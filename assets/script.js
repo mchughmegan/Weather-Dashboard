@@ -241,6 +241,8 @@ getHistory();
 //add event listeners to our search button
 $('#mainSearch').on('click', searchSubmit);
 
+
+
 //add event listener from when someone clicks on one of the previously searched cities
 $('#clickCity').on('click', previousClick);
 
