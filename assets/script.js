@@ -16,6 +16,14 @@ var searchButton = document.querySelector("#mainSearch");
 var lat = " ";
 var long = " ";
 var cityHistory = " ";
+var temp = " ";
+var wind = " ";
+var humidity = " ";
+var temp0 = " ";
+var humidity0 = " ";
+var wind0 = " ";
+var currentForecast = " ";
+
 
 //add some plugins for day js
 //utc plugin and timezone plugin
@@ -83,12 +91,11 @@ function getHistory() {
 //give them text content
 //append all of the elements into the proper section of the html
 
-function showCurrent(city, weather) {
+function showCurrent() {
+    console.log(city);
     var date = dayjs().format("M/D/YYYY");
-    var temp = weather.main.temp;
-    var wind = weather.wind.speed;
-    var humidity = weather.main.humidity;
-    var iconURL = `https://openweathermap.org/img/w/${weather.weather[0].icon}.png`;
+    var iconURL = 'https://openweathermap.org/img/wn/' + currentForecast.current.weather[0].icon + '@2x.png';
+    console.log(currentForecast.current.weather[0].icon);
     var card = document.createElement("div");
     var cardBody = document.createElement("div");
     var heading = document.createElement("h2");
@@ -103,8 +110,9 @@ function showCurrent(city, weather) {
     tempEl.setAttribute("class", "card-text");
     windEl.setAttribute("class", "card-text");
     humidityEl.setAttribute("class", "card-text");
-    weatherIcon.setAttribute("src", iconURL);
-    weatherIcon.setAttribute("class", "weather-img");
+    // weatherIcon.setAttribute("src", iconURL);
+    weatherIcon.src= iconURL;
+    $(weatherIcon).attr("img");
     heading.append(weatherIcon);
     heading.textContent = `${city} ${date}`;
     tempEl.textContent = `Temp: ${temp}F`;
@@ -126,10 +134,7 @@ function showCurrent(city, weather) {
 function showOneForecast(forecast) {
     //forecast.main.temp
     var date = dayjs().format("M/D/YYYY");
-    var temp = forecast.main.temp;
-    var wind = forecast.wind.speed;
-    var humidity = forecast.main.humidity;
-    var iconURL = `https://openweathermap.org/img/w/${weather.weather[0].icon}.png`;
+    // var iconURL = `https://openweathermap.org/img/w/${weather.weather[0].icon}.png`;
     var card = document.createElement("div");
     var cardBody = document.createElement("div");
     var heading = document.createElement("h2");
@@ -144,13 +149,13 @@ function showOneForecast(forecast) {
     tempEl.setAttribute("class", "card-text");
     windEl.setAttribute("class", "card-text");
     humidityEl.setAttribute("class", "card-text");
-    weatherIcon.setAttribute("src", iconURL);
-    weatherIcon.setAttribute("class", "weather-img");
+    // weatherIcon.setAttribute("src", iconURL);
+    // weatherIcon.setAttribute("class", "weather-img");
     heading.append(weatherIcon);
-    heading.textContent = `${city} ${date}`;
-    tempEl.textContent = `Temp: ${temp}F`;
-    windEl.textContent = `Wind: ${wind}mph`;
-    humidityEl.textContent = `Humidity: ${humidity}%`;
+    heading.textContent = `${date}`;
+    tempEl.textContent = `High Temp: ${temp0}F`;
+    windEl.textContent = `Wind: ${wind0}mph`;
+    humidityEl.textContent = `Humidity: ${humidity0}%`;
     cardBody.append(heading, tempEl, windEl, humidityEl);
     fiveDay.innerHTML = "";
     fiveDay.append(card);
@@ -167,17 +172,18 @@ function showOneForecast(forecast) {
 //for loop that is going to loop through from the start date to the end date and for each date 
 //it's going to call our function that renders the five day forecast card
 
-function showFiveForecast() {
+// function showFiveForecast() {
 
-};
+// };
 
 //function that is going to render everything to the page
 //call our function that renders the current weather
 //call the function that is the duplication of the five day forecast card
 
 function displayWeather() {
-    showFiveForecast();
+    // showFiveForecast();
     showCurrent();
+    showOneForecast();
 
 };
 
@@ -196,34 +202,43 @@ function coordApi(searchInput) {
         console.log(lat);
         long = data[0].lon;
         console.log(long);
-        currentApi();
-        forecastApi();
+        city = data[0].name;
+        weatherApi();
     }) 
 }
 
-function currentApi(){
-    //https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}
-    var getCurrent =  queryURL + '/data/2.5/weather?' + 'lat=' + lat + '&lon=' + long + '&appid=' + APIkey;
+function weatherApi(){
+    //https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&units=imperial&exclude=minutely,hourly,alerts&appid={API key}
+    var getCurrent =  queryURL + '/data/3.0/onecall?' + 'lat=' + lat + '&lon=' + long + '&units=imperial&exclude=minutely,hourly,alerts&appid=' + APIkey;
+    console.log(city);
     fetch(getCurrent)
     .then(function(response){
         return response.json();
     })
     .then(function(data){
         console.log(data);
+        currentForecast = data;
+        temp = data.current.temp;
+        wind = data.current.wind_speed;
+        humidity = data.current.humidity;
+        temp0 = data.daily[0].temp.max;
+        wind0 = data.daily[0].wind_speed;
+        humidity0 = data.daily[0].humidity;
+        displayWeather();
     })
 }
 
-function forecastApi(){
-    //https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
-    var getForecast =  queryURL + '/data/2.5/forecast?' + 'lat=' + lat + '&lon=' + long + '&appid=' + APIkey;
-    fetch(getForecast)
-    .then(function(response){
-        return response.json();
-    })
-    .then(function(data){
-        console.log(data);
-    })
-}
+// function forecastApi(){
+//     //https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
+//     var getForecast =  queryURL + '/data/2.5/forecast?' + 'lat=' + lat + '&lon=' + long + '&appid=' + APIkey;
+//     fetch(getForecast)
+//     .then(function(response){
+//         return response.json();
+//     })
+//     .then(function(data){
+//         console.log(data);
+//     })
+// }
 
 //function that fetches weather data from the 1. geo location endpoint and 
 //2. uses the onecall endpoint to retrieve the data to display the current and forecast weather
@@ -248,6 +263,7 @@ function previousClick(event) {
     var btn = event.target;
     var search = btn.getAttribute("data-search");
     console.log(search);
+    coordApi(search);
 }
     // let searchInput = searchHistory;
     // console.log(searchInput.value);
