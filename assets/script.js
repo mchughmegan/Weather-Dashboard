@@ -241,12 +241,12 @@ getHistory();
 //add event listeners to our search button
 $('#mainSearch').on('click', searchSubmit);
 
-$(searchInput).keypress(function(event){
-    var keycode = (event.keyCode ? event.keyCode : event.which);
-    if(keycode == '13'){
-        $('#mainSearch').click(searchSubmit(event));  
+$(searchInput).keypress(function (event) {
+    var keyPress = (event.keyPress ? event.keyPress : event.which);
+    if (keyPress == '13') {
+        $('#mainSearch').click(searchSubmit(event));
     }
-  });
+});
 
 //add event listener from when someone clicks on one of the previously searched cities
 $('#clickCity').on('click', previousClick);
