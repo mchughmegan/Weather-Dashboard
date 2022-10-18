@@ -238,15 +238,22 @@ function searchSubmit(event) {
 };
 
 //create a function that handles when somebody clicks on one of the previously searched cities
+// function previousClick(event) {
+//     event.preventDefault();
+//     console.log("forecast");
+//     console.log(cityHistory.valueOf);
+
 function previousClick(event) {
     event.preventDefault();
-    console.log("forecast");
-    console.log(cityHistory.valueOf);
+    var btn = event.target;
+    var search = btn.getAttribute("data-search");
+    console.log(search);
+}
     // let searchInput = searchHistory;
     // console.log(searchInput.value);
     // coordApi(searchInput.value);
 
-};
+
 //call on the function that gets our search history from local storage 
 getHistory();
 
