@@ -93,6 +93,7 @@ function getHistory() {
 //append all of the elements into the proper section of the html
 
 function showCurrent() {
+    innerHTML = " ";
     console.log(city);
     var date = dayjs().format("M/D/YYYY");
     var iconURL = 'https://openweathermap.org/img/wn/' + currentForecast.current.weather[0].icon + '@2x.png';
@@ -112,9 +113,6 @@ function showCurrent() {
     windEl.setAttribute("class", "card-text");
     humidityEl.setAttribute("class", "card-text");
     weatherIcon.setAttribute("src", iconURL);
-    // weatherIcon.src = iconURL;
-    // $(weatherIcon).attr("img");
-    // heading.appendChild(weatherIcon);
     heading.innerHTML = `${city} ${date} <img src = ${iconURL}>`;
     tempEl.textContent = `Temp: ${temp}F`;
     windEl.textContent = `Wind: ${wind}mph`;
@@ -124,76 +122,57 @@ function showCurrent() {
     currentWeather.append(card);
 };
 
-//function to display one of our five day forecast cards
+//function to display five day forecast cards
 //create variables for all of the different pieces of information we need for current weather
 //date, temp, humidity, url of the icon
 //create variables that create all of our html elements
 //give them attributes
 //give them text content
 //append all of the elements into the proper section of the html
-
-function showOneForecast() {
-for (let i = 0; i < 5; i++) {
-    console.log(currentForecast);
-    var temp = currentForecast.daily[i].temp.max;
-    var wind = currentForecast.daily[i].wind_speed;
-    var humidity = currentForecast.daily[i].humidity;
-    // var currentDate = dayjs().format("M/D/YYYY");
-    // var date = dayjs().format("M/D/YYYY");
-    let date = dayjs.unix(currentForecast.daily[i].dt).format("M/D/YYYY");
-    // var date = dayjs(currentDate).add(i, 'day');
-    var iconURL = 'https://openweathermap.org/img/wn/' + currentForecast.daily[i].weather[0].icon + '@2x.png';
-    var card = document.createElement("div");
-    var cardBody = document.createElement("div");
-    var heading = document.createElement("h2");
-    var weatherIcon = document.createElement("img");
-    var tempEl = document.createElement("p");
-    var windEl = document.createElement("p");
-    var humidityEl = document.createElement("p");
-    card.setAttribute("class", "card");
-    cardBody.setAttribute("class", "card-body");
-    card.append(cardBody);
-    heading.setAttribute("class", "card-title");
-    tempEl.setAttribute("class", "card-text");
-    windEl.setAttribute("class", "card-text");
-    humidityEl.setAttribute("class", "card-text");
-    // weatherIcon.setAttribute("src", iconURL);
-    // weatherIcon.setAttribute("class", "weather-img");
-    // heading.append(weatherIcon);
-    heading.innerHTML = `${date} <img src = ${iconURL}>`;
-    tempEl.textContent = `High Temp: ${temp}F`;
-    windEl.textContent = `Wind: ${wind}mph`;
-    humidityEl.textContent = `Humidity: ${humidity}%`;
-    cardBody.append(heading, tempEl, windEl, humidityEl);
-    // fiveDay.innerHTML = "";
-    fiveDay.append(card);
-};
-}
-
-
-//function that duplicates the above process five times
+//function that duplicates the forecast process five times
 //create variables using day js for our start and end dates
-//create variables that will create our html elements for the heading of our section
-//set attributes for the above
-//set text content as well
-//clear out inner html of our forecast container
+//create variables that will create our html elements for the heading of our section 
 //for loop that is going to loop through from the start date to the end date and for each date 
-//it's going to call our function that renders the five day forecast card
 
-// function showFiveForecast() {
-
-
-
+function showFiveForecast() {
+    innerHTML = " ";
+    for (let i = 0; i < 5; i++) {
+        console.log(currentForecast);
+        var temp = currentForecast.daily[i].temp.max;
+        var wind = currentForecast.daily[i].wind_speed;
+        var humidity = currentForecast.daily[i].humidity;
+        let date = dayjs.unix(currentForecast.daily[i].dt).format("M/D/YYYY");
+        var iconURL = 'https://openweathermap.org/img/wn/' + currentForecast.daily[i].weather[0].icon + '@2x.png';
+        var card = document.createElement("div");
+        var cardBody = document.createElement("div");
+        var heading = document.createElement("h2");
+        var weatherIcon = document.createElement("img");
+        var tempEl = document.createElement("p");
+        var windEl = document.createElement("p");
+        var humidityEl = document.createElement("p");
+        card.setAttribute("class", "card");
+        cardBody.setAttribute("class", "card-body");
+        card.append(cardBody);
+        heading.setAttribute("class", "card-title");
+        tempEl.setAttribute("class", "card-text");
+        windEl.setAttribute("class", "card-text");
+        humidityEl.setAttribute("class", "card-text");
+        heading.innerHTML = `${date} <img src = ${iconURL}>`;
+        tempEl.textContent = `High Temp: ${temp}F`;
+        windEl.textContent = `Wind: ${wind}mph`;
+        humidityEl.textContent = `Humidity: ${humidity}%`;
+        cardBody.append(heading, tempEl, windEl, humidityEl);
+        fiveDay.append(card);
+    };
+}
 
 //function that is going to render everything to the page
 //call our function that renders the current weather
 //call the function that is the duplication of the five day forecast card
 
 function displayWeather() {
-    // showFiveForecast();
     showCurrent();
-    showOneForecast();
-
+    showFiveForecast();
 };
 
 //api calls
@@ -217,7 +196,6 @@ function coordApi(searchInput) {
 }
 
 function weatherApi() {
-    //https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&units=imperial&exclude=minutely,hourly,alerts&appid={API key}
     var getCurrent = queryURL + '/data/3.0/onecall?' + 'lat=' + lat + '&lon=' + long + '&units=imperial&exclude=minutely,hourly,alerts&appid=' + APIkey;
     console.log(city);
     fetch(getCurrent)
@@ -262,10 +240,6 @@ function searchSubmit(event) {
 };
 
 //create a function that handles when somebody clicks on one of the previously searched cities
-// function previousClick(event) {
-//     event.preventDefault();
-//     console.log("forecast");
-//     console.log(cityHistory.valueOf);
 
 function previousClick(event) {
     event.preventDefault();
@@ -274,17 +248,13 @@ function previousClick(event) {
     console.log(search);
     coordApi(search);
 }
-// let searchInput = searchHistory;
-// console.log(searchInput.value);
-// coordApi(searchInput.value);
-
 
 //call on the function that gets our search history from local storage 
 getHistory();
 
 //add event listeners to our search button
 $('#mainSearch').on('click', searchSubmit);
-// searchButton.onclick(searchSubmit);
+
 //add event listener from when someone clicks on one of the previously searched cities
 $('#clickCity').on('click', previousClick);
 
