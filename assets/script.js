@@ -242,7 +242,7 @@ getHistory();
 $('#mainSearch').on('click', searchSubmit);
 
 $(searchInput).keypress(function (event) {
-    var keyPress = (event.keyPress ? event.keyPress : event.which);
+    var keyPress = (event.keyTouch ? event.keyTouch : event.which);
     if (keyPress == '13') {
         $('#mainSearch').click(searchSubmit(event));
     }
