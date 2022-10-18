@@ -244,10 +244,8 @@ $('#mainSearch').on('click', searchSubmit);
 $(searchInput).keypress(function(event){
     var keycode = (event.keyCode ? event.keyCode : event.which);
     if(keycode == '13'){
-        $('#mainSearch').click;  
+        $('#mainSearch').click(searchSubmit(event));  
     }
-
-    $("#mainSearhc").click(searchSubmit);
   });
 
 //add event listener from when someone clicks on one of the previously searched cities

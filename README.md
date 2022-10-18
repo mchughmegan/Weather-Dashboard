@@ -30,6 +30,10 @@ https://gradients.shecodes.io/gradients/1
 Color Palette:
 https://palettes.shecodes.io/palettes/1314
 
+"Clicking" the search button when pressing Enter on the keyboard:
+https://howtodoinjava.com/jquery/jquery-detect-if-enter-key-is-pressed/
+
+
 ## License
 See the MIT license in the repository.
 

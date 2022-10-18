@@ -9,10 +9,6 @@ body {
     color: white;
 }
 
-h1 {
-
-}
-
 .searchBtn {
     background: #615dec;
     color:white;
@@ -42,10 +38,6 @@ h1 {
     color:white;
 }
 
-#fivedayCard {
-   
-}
-
 .card-header {
     background: radial-gradient(circle at 12.3% 19.3%, rgb(85, 88, 218) 0%, rgb(95, 209, 249) 100.2%);
     color: white;
@@ -55,6 +47,4 @@ h1 {
 .border-bottom{
     color: #301781; 
 }
-.second-color { 
-	
-}
+
