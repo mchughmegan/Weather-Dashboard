@@ -93,7 +93,6 @@ function getHistory() {
 //append all of the elements into the proper section of the html
 
 function showCurrent() {
-    innerHTML = " ";
     console.log(city);
     var date = dayjs().format("M/D/YYYY");
     var iconURL = 'https://openweathermap.org/img/wn/' + currentForecast.current.weather[0].icon + '@2x.png';
@@ -135,7 +134,7 @@ function showCurrent() {
 //for loop that is going to loop through from the start date to the end date and for each date 
 
 function showFiveForecast() {
-    innerHTML = " ";
+    fiveDay.innerHTML = " ";
     for (let i = 0; i < 5; i++) {
         console.log(currentForecast);
         var temp = currentForecast.daily[i].temp.max;
