@@ -23,6 +23,7 @@ var temp0 = " ";
 var humidity0 = " ";
 var wind0 = " ";
 var currentForecast = " ";
+var data;
 
 
 //add some plugins for day js
@@ -110,11 +111,11 @@ function showCurrent() {
     tempEl.setAttribute("class", "card-text");
     windEl.setAttribute("class", "card-text");
     humidityEl.setAttribute("class", "card-text");
-    // weatherIcon.setAttribute("src", iconURL);
-    weatherIcon.src= iconURL;
-    $(weatherIcon).attr("img");
-    heading.append(weatherIcon);
-    heading.textContent = `${city} ${date}`;
+    weatherIcon.setAttribute("src", iconURL);
+    // weatherIcon.src = iconURL;
+    // $(weatherIcon).attr("img");
+    // heading.appendChild(weatherIcon);
+    heading.innerHTML = `${city} ${date} <img src = ${iconURL}>`;
     tempEl.textContent = `Temp: ${temp}F`;
     windEl.textContent = `Wind: ${wind}mph`;
     humidityEl.textContent = `Humidity: ${humidity}%`;
@@ -131,10 +132,17 @@ function showCurrent() {
 //give them text content
 //append all of the elements into the proper section of the html
 
-function showOneForecast(forecast) {
-    //forecast.main.temp
-    var date = dayjs().format("M/D/YYYY");
-    // var iconURL = `https://openweathermap.org/img/w/${weather.weather[0].icon}.png`;
+function showOneForecast() {
+for (let i = 0; i < 5; i++) {
+    console.log(currentForecast);
+    var temp = currentForecast.daily[i].temp.max;
+    var wind = currentForecast.daily[i].wind_speed;
+    var humidity = currentForecast.daily[i].humidity;
+    // var currentDate = dayjs().format("M/D/YYYY");
+    // var date = dayjs().format("M/D/YYYY");
+    let date = dayjs.unix(currentForecast.daily[i].dt).format("M/D/YYYY");
+    // var date = dayjs(currentDate).add(i, 'day');
+    var iconURL = 'https://openweathermap.org/img/wn/' + currentForecast.daily[i].weather[0].icon + '@2x.png';
     var card = document.createElement("div");
     var cardBody = document.createElement("div");
     var heading = document.createElement("h2");
@@ -151,30 +159,31 @@ function showOneForecast(forecast) {
     humidityEl.setAttribute("class", "card-text");
     // weatherIcon.setAttribute("src", iconURL);
     // weatherIcon.setAttribute("class", "weather-img");
-    heading.append(weatherIcon);
-    heading.textContent = `${date}`;
-    tempEl.textContent = `High Temp: ${temp0}F`;
-    windEl.textContent = `Wind: ${wind0}mph`;
-    humidityEl.textContent = `Humidity: ${humidity0}%`;
+    // heading.append(weatherIcon);
+    heading.innerHTML = `${date} <img src = ${iconURL}>`;
+    tempEl.textContent = `High Temp: ${temp}F`;
+    windEl.textContent = `Wind: ${wind}mph`;
+    humidityEl.textContent = `Humidity: ${humidity}%`;
     cardBody.append(heading, tempEl, windEl, humidityEl);
-    fiveDay.innerHTML = "";
+    // fiveDay.innerHTML = "";
     fiveDay.append(card);
 };
+}
+
 
 //function that duplicates the above process five times
 //create variables using day js for our start and end dates
 //create variables that will create our html elements for the heading of our section
-//try to do them here and not html
 //set attributes for the above
 //set text content as well
 //clear out inner html of our forecast container
-//append our variables from line 54
 //for loop that is going to loop through from the start date to the end date and for each date 
 //it's going to call our function that renders the five day forecast card
 
 // function showFiveForecast() {
 
-// };
+
+
 
 //function that is going to render everything to the page
 //call our function that renders the current weather
@@ -193,39 +202,39 @@ function coordApi(searchInput) {
     // http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}
     var getCoord = queryURL + '/geo/1.0/direct?q=' + searchInput + '&limit=3' + '&appid=' + APIkey;
     fetch(getCoord)
-    .then(function(response){
-        return response.json();
-    })
-    .then(function(data){
-        console.log(data);
-        lat = data[0].lat;
-        console.log(lat);
-        long = data[0].lon;
-        console.log(long);
-        city = data[0].name;
-        weatherApi();
-    }) 
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+            lat = data[0].lat;
+            console.log(lat);
+            long = data[0].lon;
+            console.log(long);
+            city = data[0].name;
+            weatherApi();
+        })
 }
 
-function weatherApi(){
+function weatherApi() {
     //https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&units=imperial&exclude=minutely,hourly,alerts&appid={API key}
-    var getCurrent =  queryURL + '/data/3.0/onecall?' + 'lat=' + lat + '&lon=' + long + '&units=imperial&exclude=minutely,hourly,alerts&appid=' + APIkey;
+    var getCurrent = queryURL + '/data/3.0/onecall?' + 'lat=' + lat + '&lon=' + long + '&units=imperial&exclude=minutely,hourly,alerts&appid=' + APIkey;
     console.log(city);
     fetch(getCurrent)
-    .then(function(response){
-        return response.json();
-    })
-    .then(function(data){
-        console.log(data);
-        currentForecast = data;
-        temp = data.current.temp;
-        wind = data.current.wind_speed;
-        humidity = data.current.humidity;
-        temp0 = data.daily[0].temp.max;
-        wind0 = data.daily[0].wind_speed;
-        humidity0 = data.daily[0].humidity;
-        displayWeather();
-    })
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+            currentForecast = data;
+            temp = data.current.temp;
+            wind = data.current.wind_speed;
+            humidity = data.current.humidity;
+            temp0 = data.daily[0].temp.max;
+            wind0 = data.daily[0].wind_speed;
+            humidity0 = data.daily[0].humidity;
+            displayWeather();
+        })
 }
 
 // function forecastApi(){
@@ -265,9 +274,9 @@ function previousClick(event) {
     console.log(search);
     coordApi(search);
 }
-    // let searchInput = searchHistory;
-    // console.log(searchInput.value);
-    // coordApi(searchInput.value);
+// let searchInput = searchHistory;
+// console.log(searchInput.value);
+// coordApi(searchInput.value);
 
 
 //call on the function that gets our search history from local storage 
