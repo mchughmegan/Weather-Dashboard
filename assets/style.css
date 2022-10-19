@@ -1,6 +1,7 @@
 body {
     font-family: 'Poppins', sans-serif;
     background: #f4f4ec;
+    color: #301781;
     
 }
 
@@ -26,7 +27,7 @@ body {
 
 .history-btn:hover {
     background: #615dec;
-    color:black;
+    color:#301781;
     margin-top: 4px;
     margin-bottom: 2px; 
     border: none;
@@ -47,4 +48,12 @@ body {
 .border-bottom{
     color: #301781; 
 }
+
+/* h3 {
+    font-size: larger;
+}
+
+h5 {
+    font-size: larger;
+} */
 
