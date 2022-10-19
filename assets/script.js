@@ -113,8 +113,8 @@ function showCurrent() {
     humidityEl.setAttribute("class", "card-text");
     weatherIcon.setAttribute("src", iconURL);
     heading.innerHTML = `${city} ${date} <img src = ${iconURL}>`;
-    tempEl.textContent = `Temp: ${temp}F`;
-    windEl.textContent = `Wind: ${wind}mph`;
+    tempEl.textContent = `Temp: ${temp}°F`;
+    windEl.textContent = `Wind: ${wind} mph`;
     humidityEl.textContent = `Humidity: ${humidity}%`;
     cardBody.append(heading, tempEl, windEl, humidityEl);
     currentWeather.innerHTML = "";
@@ -157,8 +157,8 @@ function showFiveForecast() {
         windEl.setAttribute("class", "card-text");
         humidityEl.setAttribute("class", "card-text");
         heading.innerHTML = `${date} <img src = ${iconURL}>`;
-        tempEl.textContent = `High Temp: ${temp}F`;
-        windEl.textContent = `Wind: ${wind}mph`;
+        tempEl.textContent = `High Temp: ${temp}°F`;
+        windEl.textContent = `Wind: ${wind} mph`;
         humidityEl.textContent = `Humidity: ${humidity}%`;
         cardBody.append(heading, tempEl, windEl, humidityEl);
         fiveDay.append(card);
